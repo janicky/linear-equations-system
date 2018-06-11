@@ -2,13 +2,14 @@ public class Gauss {
 
     private Configuration cfg;
     private double[] results;
+    private double [][] t_matrix;
 
     public Gauss() {
         cfg = new Configuration();
     }
 
     private double[][] triangularMatrix() {
-        double[][] t_matrix = cfg.getMatrix();
+        t_matrix = cfg.getMatrix();
 
         for (int i = 0; i < cfg.getSize(); i++) {
             for (int j = 0; j < cfg.getSize(); j++) {
@@ -19,4 +20,5 @@ public class Gauss {
         }
         return t_matrix;
     }
+
 }
