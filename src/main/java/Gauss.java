@@ -4,8 +4,8 @@ public class Gauss {
     private double [] results;
     private double [][] t_matrix;
 
-    public Gauss() {
-        cfg = new Configuration();
+    public Gauss(Configuration cfg) {
+        this.cfg = cfg;
         results = new double[cfg.getSize()];
     }
 
