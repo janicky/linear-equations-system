@@ -33,4 +33,12 @@ public class Gauss {
         return results;
     }
 
+    public void calculate() {
+        triangularMatrix();
+        calculateResults();
+    }
+
+    public double[] getResults() {
+        return results;
+    }
 }
