@@ -21,4 +21,16 @@ public class Gauss {
         return t_matrix;
     }
 
+    private double[] calculateResults() {
+        double nominator = 0;
+        for (int i = cfg.getSize() - 1; i >= 0; i--) {
+            nominator = t_matrix[i][cfg.getSize() - 1];
+            for (int j = cfg.getSize() - 1; j >= i + 1; j--) {
+                nominator -= t_matrix[i][j] * results[j];
+            }
+            results[i] = (t_matrix[i][i] != 0 ? nominator / t_matrix[i][i] : Double.MAX_VALUE);
+        }
+        return results;
+    }
+
 }
