@@ -14,8 +14,12 @@ public class Configuration {
         return matrix;
     }
 
-    public void setMatrix(double[][] matrix) {
-        this.matrix = matrix;
+    public void setMatrix(double[][] matrix) throws EquationException {
+        if (checkMatrix(matrix)) {
+            this.matrix = matrix;
+        } else {
+            throw new EquationException(EquationException.INVALID_MATRIX);
+        }
     }
 
     public double[] getB() {
@@ -28,5 +32,14 @@ public class Configuration {
 
     public int getSize() {
         return matrix.length;
+    }
+
+    private boolean checkMatrix(double[][] matrix) {
+        for (double[] row : matrix) {
+            if (row.length != getSize()) {
+                return false;
+            }
+        }
+        return true;
     }
 }
