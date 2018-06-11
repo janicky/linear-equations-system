@@ -6,6 +6,7 @@ public class Gauss {
 
     public Gauss() {
         cfg = new Configuration();
+        results = new double[cfg.getSize()];
     }
 
     private double[][] triangularMatrix() {
@@ -22,7 +23,7 @@ public class Gauss {
     }
 
     private double[] calculateResults() {
-        double nominator = 0;
+        double nominator;
         for (int i = cfg.getSize() - 1; i >= 0; i--) {
             nominator = t_matrix[i][cfg.getSize() - 1];
             for (int j = cfg.getSize() - 1; j >= i + 1; j--) {
