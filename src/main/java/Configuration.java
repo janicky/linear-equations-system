@@ -10,6 +10,8 @@ public class Configuration {
         return matrix;
     }
 
+    private double precision = 0.005;
+
     public void setMatrix(double[][] matrix) throws EquationException {
         if (checkMatrix(matrix)) {
             this.matrix = matrix;
@@ -29,5 +31,9 @@ public class Configuration {
             }
         }
         return true;
+    }
+
+    public double getPrecision() {
+        return precision;
     }
 }
