@@ -25,4 +25,8 @@ public class Configuration {
     public void setB(double[] b) {
         this.b = b;
     }
+
+    public int getSize() {
+        return matrix.length;
+    }
 }
