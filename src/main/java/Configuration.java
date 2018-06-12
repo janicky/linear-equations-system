@@ -10,7 +10,7 @@ public class Configuration {
         return matrix;
     }
 
-    private double precision = 0.000005;
+    private double precision = 0.0000005;
 
     public void setMatrix(double[][] matrix) throws EquationException {
         if (checkMatrix(matrix)) {

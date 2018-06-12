@@ -1,45 +1,58 @@
+import java.lang.reflect.Array;
 import java.util.Arrays;
 
 public class SimpleIteration {
 
     private Configuration cfg;
-    private double [] last_results;
-    private double [] results;
+    private double [] last_it;
+    private double [] current_it;
 
     public SimpleIteration(Configuration cfg) {
         this.cfg = cfg;
-        last_results = new double[cfg.getSize()];
-        results = new double[cfg.getSize()];
+        last_it = new double[cfg.getSize()];
+        current_it = new double[cfg.getSize()];
     }
 
     public void calculate() {
-        double [][] t_matrix = cfg.getMatrix();
+        double [][] t = cfg.getMatrix();
+        double [] n = new double[cfg.getSize()];
+        double [][] m = new double[cfg.getSize()][cfg.getSize()];
+
+//        N = D^-1
+        for (int i = 0; i < cfg.getSize(); i++) {
+            n[i] = 1 / t[i][i];
+        }
+
+//        M = N -(T + U)
+        for (int i = 0; i < cfg.getSize(); i++) {
+            for (int j = 0; j < cfg.getSize(); j++) {
+                m[i][j] = (i != j ? (-t[i][j] * n[i]) : 0);
+            }
+        }
 
         double error = Double.MAX_VALUE;
         while (error > cfg.getPrecision()) {
+
             for (int i = 0; i < cfg.getSize(); i++) {
-                double sum = t_matrix[i][cfg.getSize()] / t_matrix[i][i];
-                t_matrix[i][cfg.getSize()] = sum;
+                current_it[i] = n[i] * t[i][cfg.getSize()];
                 for (int j = 0; j < cfg.getSize(); j++) {
-                    if (i != j) {
-                        sum += (-t_matrix[i][j] / t_matrix[i][i]) * results[j];
-                    }
+                    current_it[i] += m[i][j] * last_it[j];
                 }
-                last_results[i] = results[i];
-                results[i] = sum;
             }
 
-//            error estimation
-            double sum = 0d;
             for (int i = 0; i < cfg.getSize(); i++) {
-                sum += (results[i] - last_results[i]) * (results[i] - last_results[i]);
+                last_it[i] = current_it[i];
+            }
+
+            double sum = 0;
+            for (int i = 0; i < cfg.getSize(); i++) {
+                sum += (current_it[i] - last_it[i]) * (current_it[i] - last_it[i]);
             }
             error = Math.sqrt(sum);
-            System.out.println(Arrays.toString(results));
         }
     }
 
     public double[] getResults() {
-        return results;
+        return current_it;
     }
 }
