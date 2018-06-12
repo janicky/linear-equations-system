@@ -6,10 +6,11 @@ public class Application {
         Configuration cfg = new Configuration();
         Gauss gauss = new Gauss(cfg);
         gauss.calculate();
-        System.out.println(Arrays.toString(gauss.getResults()));
+        System.out.println("Metoda Gaussa:    " + Arrays.toString(gauss.getResults()));
 
-        SimpleIteration simpleIteration = new SimpleIteration(cfg);
+        Configuration cfg2 = new Configuration();
+        SimpleIteration simpleIteration = new SimpleIteration(cfg2);
         simpleIteration.calculate();
-        System.out.println(Arrays.toString(simpleIteration.getResults()));
+        System.out.println("Metoda iteracji:  " + Arrays.toString(simpleIteration.getResults()));
     }
 }
